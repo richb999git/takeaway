@@ -1,0 +1,47 @@
+/* custom css */
+
+/* default order input doesn't show delivery address */
+#delivery{
+    display: none;
+}
+
+/* make file input smaller than default full width */
+#menuCSVInput{
+    max-width: 700px;
+}
+
+/* menu category headers needs to be set manually because of classes used */
+#menuHeader{
+    line-height: 60px;
+}
+
+/* push arrow on menu to the right */
+#upArrowRight{
+    margin-left: auto;
+}
+
+/* link back to cart shows below menu (rather than under it) */
+#cartDisplay{
+    padding-top: 60px;
+    margin-top: -60px;
+}
+  
+.titlesBackground1{
+    background: rgb(55, 55, 55); /* Fallback for older browsers without RGBA-support */
+    background: rgba(55, 55, 55, 0.7);
+    width: 100%;
+}
+
+.titlesBackground{
+    background: rgb(55, 55, 55); /* Fallback for older browsers without RGBA-support */
+    background: rgba(55, 55, 55, 0.7);
+    width: 50%;
+}
+
+#menu1{
+    background: url('/images/5.jpeg');
+}
+
+#top{
+    margin: 0px ;
+}
