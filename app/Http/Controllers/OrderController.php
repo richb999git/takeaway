@@ -34,9 +34,17 @@ class OrderController extends Controller
     public function placeOrder()
     {
         $time = OpeningTimes::OpeningTimes();
+        
+        if(date("l") == $time['day_closed']) {
+            session()->flash('errorMessage', "Sorry, we are closed today. We open again tomorrow at 5pm");
+        }
+
         if ($time['current_time'] < $time['opening']) {
             session()->flash('errorMessage', "We are presently closed. We open at 5pm. We will accept your order and it will be ready at opening time.");
-            //return redirect()->route('placeOrder'); 
+        }
+
+        if ($time['current_time'] > $time['closing']) {
+            session()->flash('errorMessage', "Sorry, we closed at 11:30pm");
         }
 
         return view('placeOrder');

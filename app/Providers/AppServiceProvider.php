@@ -28,8 +28,7 @@ class AppServiceProvider extends ServiceProvider
         // I added this in to fix error: 1071 Specified key was too long; max key length is 767 bytes
         Schema::defaultStringLength(191);
 
-        // not sure if the below is correct or in the correct method
-        // I added this based on https://dev.to/connor11528/deploy-a-laravel-5-app-to-heroku
+        // I added this based on https://dev.to/connor11528/deploy-a-laravel-5-app-to-heroku It works. Otherwise it load over http instead and https has mixed output
         // Force SSL in production
         if ($this->app->environment() == 'production') {
             URL::forceScheme('https');
