@@ -50,8 +50,8 @@ Route::post('/acceptOrder', [
     'as' => 'acceptOrder'
 ]);
 
-Auth::routes();
-//Auth::routes(['register' => false]); // use this instead when go live so that can't register a new user
+//Auth::routes();
+Auth::routes(['register' => false]); // use this instead when go live so that can't register a new user
 
 //############## ADMIN ROUTES ##############################################################################
 
