@@ -15,7 +15,7 @@
         <div class="list-group">
             @foreach ($menuCategories as $menuCategory) 
                 <div class="list-group-item list-group-item-action">
-                    <span class="align-midfdle">&nbsp;&nbsp; {{ $menuCategory->category }}</span>
+                    <span class="align-middle">&nbsp;&nbsp; ID: {{ $menuCategory->id }} - {{ $menuCategory->category }}</span>
                     <div class="float-left" >
                         <form class="float-left mr-2" action="{{ route('menuCategories.destroy', ['id' => $menuCategory->id]) }}" method="post" >
                             @csrf
