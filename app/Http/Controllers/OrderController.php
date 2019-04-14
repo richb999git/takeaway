@@ -127,7 +127,12 @@ class OrderController extends Controller
         session()->forget('menuURL');
 
         session()->flash('cartOrdered', $cart);
-        session()->flash('message', "Thank you for your order!");
+
+        if ($order->email != "") {
+            session()->flash('message', "Thank you for your order! We have sent you an email confirmation.");
+        } else {
+            session()->flash('message', "Thank you for your order!");
+        }
 
         if ($order->delivery == "Y") {
             if ($early_order) {
