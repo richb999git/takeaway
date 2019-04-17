@@ -100,7 +100,7 @@
                         <label for="first_name">First Name</label>
                     </div>
                     <div class="input-field col s6">                        
-                        <input name="last_name" id="last_name" type="tel" class="validate" value="{{ old('last_name')}}" required>
+                        <input name="last_name" id="last_name" type="text" class="validate" value="{{ old('last_name')}}" required>
                         <label for="last_name">Last Name</label>
                     </div>
                 </div>
