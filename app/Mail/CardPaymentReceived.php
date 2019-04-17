@@ -37,7 +37,7 @@ class CardPaymentReceived extends Mailable
     {
         return $this->markdown('emails.card-payment-received')
                     ->with([
-                        'url'=> session('menuURL')
+                        'url' => request()->getSchemeAndHttpHost()
                     ]);
     }
 }

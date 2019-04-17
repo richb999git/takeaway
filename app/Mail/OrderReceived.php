@@ -35,7 +35,7 @@ class OrderReceived extends Mailable
     {
         return $this->markdown('emails.order-received')
                     ->with([
-                        'url'=> session('menuURL')
+                        'url' => request()->getSchemeAndHttpHost()
                     ]);
     }
 }

@@ -1,7 +1,4 @@
 @extends('layouts.master')
-@php
-    Session::put('menuURL', url()->current());
-@endphp
 
 @section('title')
     Bengal Tiger - Menu

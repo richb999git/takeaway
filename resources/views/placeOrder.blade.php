@@ -39,7 +39,7 @@
                     
                     <div class="card-action white-text ">
                         <span class="">Total £{{ number_format($total, 2) }} &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        @if (session('cartOrdered')) 
+                        @if (session('cartOrdered') && session('orderEmail')) 
                             <form action="{{ route('cardPayment', ['amount' => $total * 100]) }}" method="POST">
                                 @csrf
                                 <script
@@ -108,7 +108,7 @@
                     <div class="input-field col s6">
                         <i class="material-icons prefix">email</i>
                         <input name="email" id="email" type="email" class="validate" value="{{ old('email')}}">
-                        <label for="email">Email</label>
+                        <label for="email"class="tooltipped" data-position="bottom" data-tooltip="Email optional but it is required to receive emails about order and to pay by card online">Email</label>
                         <span class="helper-text" data-error="please enter a valid email" data-success=""></span>
                     </div>
                     <div class="input-field col s6">

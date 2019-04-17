@@ -102,7 +102,6 @@ class OrderController extends Controller
             return redirect()->route('placeOrder'); 
         }
 
-
         $cart = session('cart2');
         $order = Order::acceptOrder(
             request('first_name'),
@@ -118,16 +117,13 @@ class OrderController extends Controller
         );
         Session::put('orderID', $order->id);
         Session::put('orderEmail', $order->email);
+        
 
         if ($order->email != "") {
             \Mail::to(request('email'))->send(
                 new OrderReceived($order)
             );
         }
-
-        session()->forget('cart2');
-        session()->forget('cartTotal');
-        session()->forget('menuURL');
 
         session()->flash('cartOrdered', $cart);
 
@@ -150,7 +146,10 @@ class OrderController extends Controller
                 session()->flash('message2', "Your order will be ready to collect in 15 minutes.");
             }
             
-        }  
+        } 
+               
+        session()->forget('cart2');
+        session()->forget('cartTotal');
 
         return redirect()->route('placeOrder'); 
     }
@@ -184,6 +183,7 @@ class OrderController extends Controller
 
         session()->forget('orderID');
         session()->forget('orderEMail');
+        
         return redirect()->route('placeOrder'); 
     }
 

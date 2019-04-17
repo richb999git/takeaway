@@ -15,3 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var options = {height: 600, indicators: true};
   var instances = M.Slider.init(elems, options);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.tooltipped');
+  var options = {};
+  var instances = M.Tooltip.init(elems, options);
+});
