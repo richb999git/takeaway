@@ -41,6 +41,13 @@ class Order extends Model
         return $order;
     }
 
+    public static function paidByCard($id, $ref) {
+        $order = Order::findOrFail($id);
+        $order->paid = "Y";
+        $order->cardPaymentRef = $ref;
+        $order->save();
+    }
+
     
     //-----------------------------------------ADMIN METHODS--------------------------------------
 

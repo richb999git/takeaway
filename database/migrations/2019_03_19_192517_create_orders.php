@@ -29,6 +29,7 @@ class CreateOrders extends Migration
             $table->string('status')->nullable();
             $table->string('paid');
             $table->timestamp('receivedDateTime')->nullable(); // for set up
+            $table->string('cardPaymentRef')->nullable();
         });
     }
 

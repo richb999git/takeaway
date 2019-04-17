@@ -8,6 +8,7 @@ use App\TakeawayMenu;
 use Session;
 use App\Http\Controllers\App;
 use App\Mail\OrderReceived;
+use App\Mail\CardPaymentReceived;
 use App\Services\OpeningTimes;
 
 class OrderController extends Controller
@@ -115,6 +116,8 @@ class OrderController extends Controller
             request('delivery'),
             $cart
         );
+        Session::put('orderID', $order->id);
+        Session::put('orderEmail', $order->email);
 
         if ($order->email != "") {
             \Mail::to(request('email'))->send(
@@ -129,9 +132,9 @@ class OrderController extends Controller
         session()->flash('cartOrdered', $cart);
 
         if ($order->email != "") {
-            session()->flash('message', "Thank you for your order! We have sent you an email confirmation.");
+            session()->flash('message', "Thank you for your order! Order number: " . $order->id . ". We have sent you an email confirmation.");
         } else {
-            session()->flash('message', "Thank you for your order!");
+            session()->flash('message', "Thank you for your order! Order: " . $order->id);
         }
 
         if ($order->delivery == "Y") {
@@ -144,7 +147,7 @@ class OrderController extends Controller
             if ($early_order) {
                 session()->flash('message2', "Your order will be ready at opening time.");
             } else {
-               session()->flash('message2', "Normally it will be ready for collection in 15 minutes."); 
+                session()->flash('message2', "Your order will be ready to collect in 15 minutes.");
             }
             
         }  
@@ -152,5 +155,40 @@ class OrderController extends Controller
         return redirect()->route('placeOrder'); 
     }
 
+
     
+    public function cardPayment() {
+        // Set your secret key: remember to change this to your live secret key in production
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey("sk_test_e5sttrrSfJ6ZBzOrtveERach00tLCCztBM");
+
+        $charge = \Stripe\Charge::create([
+            'amount' => request('amount'),
+            'currency' => 'gbp',
+            'description' => 'Bengal Tiger takeaway ' . session('orderID'),
+            'source' => request('stripeToken'),
+            'metadata' => ['order_id' => session('orderID')],  // to do properly
+        ]);
+
+        if ($charge->paid) {            
+            Order::paidByCard(session('orderID'), $charge->payment_method);
+            \Mail::to(session('orderEmail'))->send(
+                new CardPaymentReceived(session('orderID'), $charge->payment_method)
+            );
+            session()->flash('message', "Your payment has been successful. We have just sent you an email to confirm.");
+            session()->flash('message2', "Payment reference: ". $charge->payment_method);
+        } else {
+            session()->flash('message', "Payment declined. Please phone us or pop in.");
+            session()->flash('message2', "");
+        }
+
+        session()->forget('orderID');
+        session()->forget('orderEMail');
+        return redirect()->route('placeOrder'); 
+    }
+
+    public function paymentRequest() {
+        return view('paymentRequest');
+    }
+
 }

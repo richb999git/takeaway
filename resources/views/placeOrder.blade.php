@@ -22,8 +22,11 @@
             <div class="col s12 l6 offset-l3">
                 <div class="card blue-grey">
                     <div class="card-content white-text"> 
-                        <span class="white-text">{{ session('message') }} {{ session('message2') }} </span>
+                        <span class="white-text">{{ session('message') }} </span><br>
+                        <span class="white-text"> {{ session('message2') }} </span>
                         <br><br>
+
+                    @if (session('cartOrdered')) 
                         <span class="card-title">You Ordered:</span>
                         @foreach ( session('cartOrdered') as $cartLine)       
                             @php $total += $cartLine['price']; @endphp                                           
@@ -31,17 +34,36 @@
                             <span> £{{ number_format($cartLine['price'], 2) }}</span>
                             <br> 
                         @endforeach
-                
-                        </div>
-                        <div class="card-action white-text ">
-                            <span class="">Total £{{ number_format($total, 2) }} &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            
-                        </div>
+                       
+                    </div>
+                    
+                    <div class="card-action white-text ">
+                        <span class="">Total £{{ number_format($total, 2) }} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        @if (session('cartOrdered')) 
+                            <form action="{{ route('cardPayment', ['amount' => $total * 100]) }}" method="POST">
+                                @csrf
+                                <script
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_mX7PzrwcYsuooqdEQTepOigm00DGb2SI8B"
+                                    data-amount="{{ $total * 100 }}"
+                                    data-name="Bengal Takeaway"
+                                    data-email="{{ session('orderEmail') }}"
+                                    data-description="Bengal Tiger charge"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                    data-locale="auto"
+                                    data-currency="gbp">
+                                </script>
+                            </form>
+                            <p>Or pay cash. Up to you!</p>
+                        @endif 
+                    </div>
+
+                    @endif
+
                 </div>
             </div>
         </div> 
         <br>
-
 
 
     @else

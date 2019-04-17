@@ -100,6 +100,5 @@ Route::resource('/menuCategories', 'AdminMenuCategoryController')->middleware('a
 Route::get('/downloadCategories', 'AdminMenuCategoryController@downloadCategories')->name('downloadCategories')->middleware('auth');
 
 
-
-
+Route::post('/cardPayment', 'OrderController@cardPayment')->name('cardPayment');
 

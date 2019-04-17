@@ -7,7 +7,7 @@ Thank you for your order. We will start preparing it now.
 
 @if(Session::has('cart2') && session('cart2') != [])
 @php $total = 0; @endphp                     
-**Your Order:**
+**Your Order ({{ $order->id }}):**
 @foreach ( session('cart2') as $cartLine)       
     @php $total += $cartLine['price']; @endphp                                            
 **&nbsp;&nbsp;{{ ($cartLine['title']) }} £{{ number_format($cartLine['price'], 2) }}** <br>                      
