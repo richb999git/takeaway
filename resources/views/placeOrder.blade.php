@@ -109,7 +109,7 @@
                         <i class="material-icons prefix">email</i>
                         <input name="email" id="email" type="email" class="validate" value="{{ old('email')}}">
                         <label for="email"class="tooltipped" data-position="bottom" data-tooltip="Email optional but it is required to receive emails about order and to pay by card online">Email</label>
-                        <span class="helper-text" data-error="please enter a valid email" data-success=""></span>
+                        <span class="helper-text" data-error="please enter a valid email" data-success="">Optional but required for card payment</span>
                     </div>
                     <div class="input-field col s6">
                         <i class="material-icons prefix">phone</i>

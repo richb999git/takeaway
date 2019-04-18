@@ -160,16 +160,47 @@ class OrderController extends Controller
         // Set your secret key: remember to change this to your live secret key in production
         // See your keys here: https://dashboard.stripe.com/account/apikeys
         \Stripe\Stripe::setApiKey("sk_test_e5sttrrSfJ6ZBzOrtveERach00tLCCztBM");
-
-        $charge = \Stripe\Charge::create([
-            'amount' => request('amount'),
-            'currency' => 'gbp',
-            'description' => 'Bengal Tiger takeaway ' . session('orderID'),
-            'source' => request('stripeToken'),
-            'metadata' => ['order_id' => session('orderID')],  // to do properly
-        ]);
-
-        if ($charge->paid) {            
+        //dd('before charge');
+        session()->flash('message2', "");
+        try {
+            $charge = \Stripe\Charge::create([
+                'amount' => request('amount'),
+                'currency' => 'gbp',
+                'description' => 'Bengal Tiger takeaway ' . session('orderID'),
+                'source' => request('stripeToken'),
+                'metadata' => ['order_id' => session('orderID')],  // to do properly
+            ]);
+        } catch(\Stripe\Error\Card $e) {
+            // Since it's a decline, \Stripe\Error\Card will be caught
+            $body = $e->getJsonBody();
+            $err  = $body['error'];
+            dump('Status is:' . $e->getHttpStatus() . "\n");
+            dump('Type is:' . $err['type'] . "\n");
+            dump('Code is:' . $err['code'] . "\n");
+            dd('Message is:' . $err['message'] . "\n");
+            session()->flash('message', $err['message'] . ". Please phone us or pop in.");
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            session()->flash('message', "Payment problem. Please phone us or pop in.");
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            session()->flash('message', "Payment problem. Please phone us or pop in.");
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed (maybe you changed API keys recently)
+            session()->flash('message', "Payment problem. Please phone us or pop in.");
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            session()->flash('message', "Payment problem. Please phone us or pop in.");
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send yourself an email
+            session()->flash('message', "Payment problem. Please phone us or pop in.");
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            session()->flash('message', "Payment problem. Please phone us or pop in.");
+        }
+        
+        //dd($charge);
+        if (isset($charge->paid)) {            
             Order::paidByCard(session('orderID'), $charge->payment_method);
             \Mail::to(session('orderEmail'))->send(
                 new CardPaymentReceived(session('orderID'), $charge->payment_method)
