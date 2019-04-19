@@ -123,6 +123,55 @@ class OrderController extends Controller
             \Mail::to(request('email'))->send(
                 new OrderReceived($order)
             );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            \Mail::to(request('email'))->send(
+                new OrderReceived($order)
+            );
+            
         }
 
         session()->flash('cartOrdered', $cart);
@@ -199,7 +248,6 @@ class OrderController extends Controller
             session()->flash('message', "Payment problem. Please phone us or pop in.");
         }
         
-        //dd($charge);
         if (isset($charge->paid)) {            
             Order::paidByCard(session('orderID'), $charge->payment_method);
             \Mail::to(session('orderEmail'))->send(

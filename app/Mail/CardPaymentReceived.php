@@ -36,6 +36,7 @@ class CardPaymentReceived extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.card-payment-received')
+                    ->from('orders@bengaltiger.co.uk')
                     ->with([
                         'url' => request()->getSchemeAndHttpHost()
                     ]);

@@ -34,6 +34,7 @@ class OrderReceived extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.order-received')
+                    ->from('orders@bengaltiger.co.uk')
                     ->with([
                         'url' => request()->getSchemeAndHttpHost()
                     ]);
