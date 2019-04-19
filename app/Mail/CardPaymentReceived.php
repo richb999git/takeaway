@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 
-class CardPaymentReceived extends Mailable
+class CardPaymentReceived extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
