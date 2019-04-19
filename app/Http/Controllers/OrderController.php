@@ -123,55 +123,6 @@ class OrderController extends Controller
             \Mail::to(request('email'))->send(
                 new OrderReceived($order)
             );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            \Mail::to(request('email'))->send(
-                new OrderReceived($order)
-            );
-            
         }
 
         session()->flash('cartOrdered', $cart);
