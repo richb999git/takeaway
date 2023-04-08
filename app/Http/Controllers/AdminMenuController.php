@@ -47,7 +47,7 @@ class AdminMenuController extends Controller
         request()->validate([
             'title' => ['required', 'min:3', 'max:50'],
             'description' => ['max:150'],
-            'price' => ['required', 'numeric'], 
+            'price' => ['required', 'numeric', 'min:0.00', 'max:999.99'], 
             'category' => ['required', 'integer']
         ]);
 
