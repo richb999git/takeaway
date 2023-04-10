@@ -11,7 +11,7 @@
         <div class="slider">
             <ul class="slides">
             <li>
-                <img src="{{ asset('indian-cuisine-1.jpg')}}">
+                <img src="{{ asset('images/indian-cuisine-1.jpg')}}">
                 <div class="caption center-align">
                     <div class="titlesBackground1">
                         <div class="card transparent">
