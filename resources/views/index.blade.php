@@ -11,7 +11,7 @@
         <div class="slider">
             <ul class="slides">
             <li>
-                <img src="{{ asset('images/indian-cuisine-1.jpg')}}">
+                <img src="{{ asset('indian-cuisine-1.jpg')}}">
                 <div class="caption center-align">
                     <div class="titlesBackground1">
                         <div class="card transparent">
@@ -54,7 +54,7 @@
         <div class="container center"> 
             <div class="row">
                 <div class="col l4 m4 s12">
-                    <img class="responsive-img" src="{{ asset('images/indian3.jpeg')}}" alt="">
+                    <img class="responsive-img" src="{{ asset('./images/indian3.jpeg')}}" alt="">
                 </div>
 
                 <div class="col l4 m4 s12">
