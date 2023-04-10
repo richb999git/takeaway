@@ -54,7 +54,7 @@
         <div class="container center"> 
             <div class="row">
                 <div class="col l4 m4 s12">
-                    <img class="responsive-img" src="{{ asset('./images/indian3.jpeg')}}" alt="">
+                    <img class="responsive-img" src="{{ asset('images/indian3.jpeg')}}" alt="">
                 </div>
 
                 <div class="col l4 m4 s12">
