@@ -9,7 +9,7 @@
         "dest": "/api/index.php"
         },
         {
-            "src": "/(.*)",
+            "src": "/public/(.*)",
             "dest": "/public/"
         }
     ],
