@@ -9,3 +9,5 @@ set email variables?
 railway.app build command as a minimum should be: `php run optimize`
 this can be in the settings or you can set a variable NIXPACKS_BUILD_CMD
   if you wanted to start from scratch you could add: `php run optimize && php artisan migrate --force`
+
+This project currently need php v7
