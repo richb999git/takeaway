@@ -5,6 +5,22 @@
     },
     "routes": [
         {
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
+        },
+        {
+            "src": "/css/(.*)",
+            "dest": "/public/css/"
+        },
+        {
+            "src": "/js/(.*)",
+            "dest": "/public/js/"
+        },
+        {
+            "src": "/vendor/(.*)",
+            "dest": "/public/vendor/"
+        },
+        {
             "src": "/images/(.*)",
             "dest": "/public/images/"
         },
